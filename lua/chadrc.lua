@@ -5,9 +5,9 @@
 local M = {}
 
 M.base46 = {
-  theme = "catppuccin",
-  transparency = true,
-  theme_toggle = { "catppuccin", "ayu_light" },
+  theme = "nord",
+  transparency = false,
+  theme_toggle = { "nord", "ayu_light" },
   -- theme = "onedark",
 
   hl_override = {

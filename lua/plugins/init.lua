@@ -24,6 +24,42 @@ return {
         "css",
       },
     },
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        -- Указываем, что мы хотим использовать autotag
+        autotag = {
+          enable = true,
+        },
+        -- Включаем поддержку для нужных языков
+        ensure_installed = { "html", "javascript", "typescript", "tsx", "xml" },
+        highlight = {
+          enable = true,
+        },
+      }
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    after = "nvim-treesitter", -- Этот плагин должен загружаться после treesitter
+    config = function()
+      require("nvim-ts-autotag").setup {
+        opts = {
+          -- Defaults
+          enable_close = true, -- Auto close tags
+          enable_rename = true, -- Auto rename pairs of tags
+          enable_close_on_slash = false, -- Auto close on trailing </
+        },
+        -- Also override individual filetype configs, these take priority.
+        -- Empty by default, useful if one of the "opts" global settings
+        -- doesn't work well in a specific filetype
+        per_filetype = {
+          ["html"] = {
+            enable_close = false,
+          },
+        },
+      }
+    end,
   },
 
   {
@@ -199,9 +235,10 @@ return {
       }
     end,
   },
-
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   opts = {},
-  -- },
+  {
+    "ThePrimeagen/harpoon",
+    config = function()
+      require("harpoon").setup()
+    end,
+  },
 }
