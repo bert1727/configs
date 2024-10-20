@@ -145,9 +145,12 @@ return {
     config = function()
       require("oil").setup {
         default_file_explorer = false,
-        columns = { "icon" },
+        columns = { "icon", "permissions", "size", "mtime" },
         view_options = {
           show_hidden = true,
+        },
+        win_options = {
+          cursorcolumn = false,
         },
       }
     end,
@@ -188,7 +191,10 @@ return {
     Lazy = false,
     opts = {},
     config = function()
-      require("ibl").setup {}
+      require("ibl").setup {
+        indent = { char = "│" },
+        -- indent = { char = "·" },
+      }
     end,
   },
 
@@ -240,5 +246,24 @@ return {
     config = function()
       require("harpoon").setup()
     end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+    config = function()
+      require "configs.dap-config"
+    end,
+  },
+
+  {
+    "nvim-neotest/nvim-nio",
   },
 }

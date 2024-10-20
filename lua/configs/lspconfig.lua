@@ -21,7 +21,7 @@ for _, lsp in ipairs(servers) do
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
-    update_in_insert = true,
+    update_in_insert = false,
     commands = {
       OrganizeImports = {
         organize_imports,
@@ -84,6 +84,30 @@ lspconfig.omnisharp.setup {
   organize_imports_on_format = true,
   enable_import_completion = true,
   -- enable_editorconfig_support = true,
+}
+
+lspconfig.taplo.setup {
+  on_attach = function(client, bufnr)
+    -- Вызов дефолтного on_attach
+    nvlsp.on_attach(client, bufnr)
+
+    -- Настройка клавиши для показа документации о Crate
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      "n",
+      "K",
+      [[:lua 
+      if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+        require("crates").show_popup()
+      else
+        vim.lsp.buf.hover()
+      end
+    end<CR>]],
+      { noremap = true, silent = true, desc = "Show Crate Documentation" }
+    )
+  end,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
 }
 
 -- lspconfig.rust_analyzer.setup {
