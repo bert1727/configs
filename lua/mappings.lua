@@ -68,3 +68,15 @@ end, { desc = "Navigate to file 3" }) -- Перейти к третьему фа
 vim.keymap.set("n", "<leader>4", function()
   require("harpoon.ui").nav_file(4)
 end, { desc = "Navigate to file 4" }) -- Перейти к четвертому файлу
+
+-- Открыть диагностический список LSP и использовать Telescope для поиска
+map("n", "<leader>ld", function()
+  require("telescope.builtin").diagnostics {
+    bufnr = 0, -- если хотите, чтобы поиск был только в текущем буфере
+  }
+end, { desc = "List diagnostics in Telescope" })
+
+-- Использовать grep по диагностике LSP (grep_string)
+map("n", "<leader>lg", function()
+  require("telescope.builtin").diagnostics {}
+end, { desc = "List diagnostics in Telescope for all buffers" })
