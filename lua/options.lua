@@ -11,8 +11,8 @@ o.smartcase = true
 o.incsearch = true
 o.scrolloff = 7
 o.smarttab = true
-o.cursorlineopt = "both"
-o.cursorline = true
+-- o.cursorlineopt = "both"
+-- o.cursorline = true
 vim.lsp.inlay_hint.enable(true, { 0 })
 
 --

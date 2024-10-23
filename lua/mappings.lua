@@ -77,6 +77,6 @@ map("n", "<leader>ld", function()
 end, { desc = "List diagnostics in Telescope" })
 
 -- Использовать grep по диагностике LSP (grep_string)
-map("n", "<leader>lg", function()
+map("n", "<leader>la", function()
   require("telescope.builtin").diagnostics {}
 end, { desc = "List diagnostics in Telescope for all buffers" })
